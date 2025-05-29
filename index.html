@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybergrind Waves Distribution Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="cybercharts.js?202505303"></script>
+    <meta property="og:title" content="Cybergrind Waves Distribution" />
+    <meta property="og:description" content="A tool for analyzing global Gybergrind statistics" />
+    <meta property="og:url" content="https://flazhik.github.io/cybergrind-waves-distribution/" />
+    <meta property="og:type" content="website" />
+    <style>
+            body {
+                background-image: url(background.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+            }
+
+            canvas {
+                max-height: 500px;
+            }
+        </style>
+</head>
+<body class="p-4 bg-light">
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="mb-4 w-75">Cybergrind Waves Distribution Data</h1>
+        <select id="difficulty" class="form-select form-select-lg mb-3 w-25" aria-label=".form-select-lg example">
+            <option selected value="brutal">Brutal</option>
+            <option value="violent">Violent</option>
+        </select>
+    </div>
+    <div class="card p-3 mb-4">
+        <label for="wave-input" class="form-label">Enter the wave number (can be a decimal fraction like <strong>20.50</strong>): </label>
+        <input type="number" class="form-control" id="wave-input" placeholder="Enter wave number" step="any" />
+        <div class="mt-2">
+            <p>
+                <strong>Percentile:</strong>
+                <span id="percentile">-</span>
+            </p>
+            <p>
+                <strong>Position in the scoreboard (approximate):</strong>
+                <span id="position">-</span>
+            </p>
+        </div>
+    </div>
+    <div class="card p-3 mb-4">
+        <label for="steam-id-input" class="form-label">Enter SteamID (Int64 format):</label>
+        <input type="text" class="form-control" id="steam-id-input" placeholder="Enter SteamID" />
+        <div class="mt-3" id="steam-info" style="display:none;">
+            <p>
+                <strong>Position in the scoreboard:</strong>
+                <span id="steam-position"></span>
+            </p>
+            <p>
+                <a href="" target="_blank" id="steam-profile-link">View Steam Profile</a>
+            </p>
+        </div>
+        <p id="steam-id-not-found" class="text-danger mt-2" style="display:none;">No records for this SteamID</p>
+    </div>
+    <div class="card p-3 mb-4">
+        <label class="form-label">Filter by Wave Range:</label>
+        <div class="row g-2">
+            <div class="col-md-6">
+                <input type="number" id="start-wave-input" class="form-control" placeholder="Start Wave" />
+            </div>
+            <div class="col-md-6">
+                <input type="number" id="end-wave-input" class="form-control" placeholder="End Wave" />
+            </div>
+        </div>
+    </div>
+    <div class="mb-5 p-3 card">
+        <h5>Position in the Scoreboard by Wave</h5>
+        <canvas id="pbw-chart"></canvas>
+    </div>
+    <div class="mb-5 p-3 card">
+        <h5>Reached Wave by Position in the Scoreboard</h5>
+        <canvas id="wbp-chart"></canvas>
+    </div>
+</div>
+<footer class="text-center py-3 mt-auto">
+    <div class="container">
+		<span class="text-muted">
+			<h5>Data as of May 31th, 2025</h5>
+		</span>
+    </div>
+</footer>
+</body>
+</html>
